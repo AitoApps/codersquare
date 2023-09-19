@@ -21,6 +21,7 @@ import { User, Post, Comment, Like } from "../../types";
     }
     createPost(post: Post): void {
         this.posts.push(post);
+        console.log("createPost", post);
     }
     getPost(id: string): Post | undefined {
        return this.posts.find(p=> p.id == id);

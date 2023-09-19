@@ -1,9 +1,7 @@
 import express, { RequestHandler } from "express";
-import { db } from "./datastore";
+import { createPostHandler, listPostsHandler } from "./handlers/postHandlers";
 
 const app = express();
-
-
 
 app.use(express.json());
 
@@ -14,15 +12,8 @@ const requestLoggerMiddlware: RequestHandler = (req, _ , next) => {
 
 app.use(requestLoggerMiddlware)
 
-app.get('/posts',(_, res)=> {
-    console.log(db.listPost());
-    res.send(db.listPost());
-});
+app.get('/posts',listPostsHandler);
 
-app.post('/posts',(req, res) => {
-const post = req.body
-db.createPost(post);
-res.sendStatus(200);
-});
+app.post('/posts',createPostHandler);
 
 app.listen(3000);
